@@ -63,8 +63,66 @@
   --r-lg: 6px;
   --r-pill: 999px;
 
+  /* The one rule width for lifted speech - story beats and pull
+     quotes are the same device and must not disagree. */
+  --rule-quote: 2px;
+
+  /* ---- Type scale ----
+     Eight text steps, then eight display steps. The values are not
+     invented: each one is a size the deck already used, kept where the
+     deck leaned on it and merged where it had drifted. The three sizes
+     the whole talk is built on - label, body, subtitle - are exact.
+
+     Text range steps by roughly 1.13. Display steps by role, because
+     on a 1280x720 stage every large size is a specific moment rather
+     than a rung on a ladder. */
+  --t-2xs: 0.62rem;   /* dock hints, footnote marks */
+  --t-xs: 0.68rem;    /* LABEL - slide-tag, card-icon, mode-badge */
+  --t-sm: 0.78rem;    /* captions, code headers, metadata */
+  --t-base: 0.88rem;  /* dense lists, annotations, side notes */
+  --t-md: 1rem;       /* BODY - card copy, list items */
+  --t-lg: 1.15rem;    /* SUBTITLE - slide-subtitle, lead-in copy */
+  --t-xl: 1.3rem;     /* emphasised body, story text */
+  --t-2xl: 1.5rem;    /* small statement, modal headings */
+
+  --t-d1: 2.55rem;    /* statement */
+  --t-d2: 3rem;       /* TITLE - slide-title */
+  --t-d3: 3.4rem;     /* raised title */
+  --t-d4: 3.8rem;     /* peak statement */
+  --t-d5: 4.2rem;     /* divider-title */
+  --t-d6: 4.5rem;     /* timer-badge */
+  --t-d7: 6.5rem;     /* hero-title */
+  --t-d8: 9.5rem;     /* divider numeral */
+
+  /* ---- Spacing scale ----
+     Anchored on the values the deck already leaned on most - 0.7, 1,
+     1.25, 1.5, 2 and 3.5rem. The middle is deliberately finer than
+     the ends, because that is where slide rhythm actually gets set. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.7rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-7: 2rem;
+  --sp-8: 2.75rem;
+  --sp-9: 3.5rem;
+  --sp-10: 5.25rem;
+
+  /* ---- Measure ----
+     Caps on line length, so body copy stops where it was told to
+     rather than wherever the slide happens to end. Held in px because
+     the stage is a fixed 1280x720 and these values decide line breaks
+     the talk was rehearsed against. */
+  --measure-tight: 460px;
+  --measure-base: 640px;
+  --measure-wide: 760px;
+
   --shadow-soft: 0 18px 55px rgba(0, 0, 0, 0.45);
   --shadow-card: 0 10px 24px rgba(0, 0, 0, 0.22);
+  /* Stickers are alpha cutouts, so their shadow has to follow the
+     artwork's edge. A box-shadow would draw the image's rectangle. */
+  --shadow-sticker: 0 6px 14px rgba(0, 0, 0, 0.34);
 
   --stage-w: 1280px;
   --stage-h: 720px;
@@ -106,6 +164,7 @@
 
   --shadow-soft: 0 18px 55px rgba(20, 22, 22, 0.12);
   --shadow-card: 0 8px 20px rgba(20, 22, 22, 0.08);
+  --shadow-sticker: 0 4px 10px rgba(20, 22, 22, 0.13);
 }
 
 /* ---------- Reset and room ---------- */
@@ -317,6 +376,7 @@ body::before {
 .slide-center .slide-tag::before { width: 16px; }
 .slide-center .slide-title,
 .slide-center .slide-subtitle { text-align: center; margin-inline: auto; }
+.slide-center .slide-body:not(.center) { text-align: left; }
 
 /* ---------- Body layouts ---------- */
 .slide-body {
@@ -342,7 +402,7 @@ body::before {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 1.25rem;
+  gap: 1.75rem;
 }
 .slide-body.center > * { margin-inline: auto; }
 
@@ -405,7 +465,9 @@ body::before {
   background: none;
   border: none;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  /* Every card-icon in the deck carried an inline bump off the old
+     0.72rem, so the bump is the real size. */
+  font-size: var(--t-base);
   font-weight: 600;
   letter-spacing: 0.12em;
 }
@@ -689,7 +751,6 @@ body::before {
 }
 .divider-num {
   display: block;
-  margin-bottom: 0.3rem;
   color: var(--amber);
   font-family: var(--font-sans);
   font-size: 9.5rem;
@@ -711,7 +772,7 @@ body::before {
 }
 .divider-sub {
   max-width: 52ch;
-  margin: 1rem auto 0;
+  margin: 0 auto;
   color: var(--text-secondary);
   font-size: 1.12rem;
   line-height: 1.45;
@@ -775,7 +836,7 @@ body::before {
   padding: 1rem 0 0 1.2rem;
   color: var(--text-primary);
   background: none;
-  border-left: 3px solid var(--amber);
+  border-left: var(--rule-quote) solid var(--amber);
   border-radius: 0;
   font-size: 1.12rem;
   line-height: 1.42;
@@ -821,25 +882,33 @@ body::before {
 .todo { color: var(--amber); border-bottom: 1px dashed currentColor; font-style: normal; }
 
 /* ---------- Images and hero ---------- */
+/* Sticker artwork is 112-222px wide at source, so every historical
+   max-width here (210-340px) sat above the intrinsic size and did
+   nothing at all - each sticker simply rendered at its own natural
+   size. Sizing from height gives the row a shared optical baseline,
+   and staying near the source resolution keeps the art crisp when
+   the stage is projected. */
 .reaction-sticker {
   width: auto;
-  height: auto;
-  max-width: 260px !important;
-  max-height: 260px !important;
+  height: var(--sticker-h, 175px);
   margin: 0 auto;
   object-fit: contain;
-  filter: none;
+  filter: drop-shadow(var(--shadow-sticker));
   border-radius: 0;
   pointer-events: none;
   user-select: none;
 }
+.reaction-sticker.sticker-sm { --sticker-h: 150px; }
+.reaction-sticker.sticker-md { --sticker-h: 175px; }
+.reaction-sticker.sticker-lg { --sticker-h: 200px; }
+.reaction-sticker.sticker-xl { --sticker-h: 225px; }
 .reaction-sticker.animated { animation: float-sticker 5s ease-in-out infinite; }
 @keyframes float-sticker {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
 .stick-figure-wrapper { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 180px; padding: 0; }
-.stick-figure-wrapper img { width: auto; max-width: 260px; height: auto; }
+.stick-figure-wrapper img { width: auto; max-width: 340px; height: auto; }
 
 .hero-kicker {
   color: var(--amber);
@@ -1040,8 +1109,8 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
   position: absolute;
   right: 3.5rem;
   bottom: 3rem;
-  max-width: 200px !important;
-  max-height: 200px !important;
+  max-width: 240px !important;
+  max-height: 240px !important;
   margin: 0;
   opacity: 0.85;
 }
@@ -1055,6 +1124,49 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-41 .statement { max-width: 23ch; font-size: 3.15rem; }
 #slide-60 .statement { max-width: 20ch; font-size: 3.8rem; line-height: 0.96; }
 
+/* Centered slides that carry a real header need air between it and the body,
+   unlike the empty-header pause slides where the header collapses. */
+#slide-4 .slide-header,
+#slide-8 .slide-header { margin-bottom: 2.25rem; }
+
+/* Slide 6 (promises): content block sits centered under the centered title,
+   with card-like air between the numbered rows. */
+#slide-6 .slide-header { margin-bottom: 2.25rem; }
+#slide-6 .slide-body { align-items: center; }
+#slide-6 .step-list {
+  width: 100%;
+  max-width: 740px;
+  margin-inline: auto;
+  padding: 1.75rem 2.25rem;
+  background: var(--bg-surface);
+  border-radius: var(--r-sm);
+}
+#slide-26 .slide-header { margin-bottom: 2.25rem; }
+#slide-26 .slide-body { align-items: center; }
+#slide-26 .step-list {
+  width: 100%;
+  max-width: 740px;
+  margin-inline: auto;
+  padding: 2.25rem 2.75rem;
+  background: var(--bg-surface);
+  border-radius: var(--r-sm);
+  gap: 1.6rem;
+}
+#slide-26 .step-list li { font-size: 1.15rem; }
+
+#slide-30 .slide-header { margin-bottom: 2.25rem; }
+#slide-30 .slide-body { gap: 1.6rem; }
+#slide-30 .cutoff-card {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 2rem 2.5rem;
+  background: var(--bg-surface);
+  border-radius: var(--r-sm);
+  gap: 1.1rem;
+}
+#slide-30 .cutoff-card li { font-size: 1.12rem; }
+
 /* Section dividers are visual rests, with no accidental header spacing. */
 #slide-9 .slide-body,
 #slide-16 .slide-body,
@@ -1062,9 +1174,14 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-29 .slide-body,
 #slide-36 .slide-body,
 #slide-46 .slide-body,
-#slide-54 .slide-body { gap: 1.2rem; }
+#slide-54 .slide-body { gap: 1.75rem; }
 #slide-46 .reaction-sticker,
-#slide-54 .reaction-sticker { max-width: 190px !important; max-height: 190px !important; }
+#slide-54 .reaction-sticker { max-width: 240px !important; max-height: 240px !important; }
+/* Break slide 45 is content-dense (two QR slots + a sticker + a caption):
+   keep its rhythm a touch tighter and the sticker smaller so it stays inside
+   the stage. */
+#slide-45 .slide-body { gap: 1.25rem; }
+#slide-45 .reaction-sticker { max-width: 150px !important; max-height: 150px !important; }
 
 /* Sparse prompt/demo slides: let the prompt be the slide. */
 #slide-2 .code-block,
@@ -1078,7 +1195,53 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-28 .code-block,
 #slide-55 .code-block { font-size: 1.45rem; }
 
+/* Slide 5 (failure story): give the title room and keep it distinct
+   from the story text below. */
+#slide-5 .slide-header { margin-bottom: 2.75rem; }
+#slide-5 .slide-title {
+  font-size: 3.4rem;
+  letter-spacing: -0.05em;
+}
+#slide-5 .slide-body { gap: 1.75rem; }
+#slide-5 .story-lead { max-width: 660px; }
+#slide-5 .story-footnote {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 /* Dense material starts at the top of the content zone instead of floating. */
+#slide-10 .slide-header,
+#slide-32 .slide-header,
+#slide-40 .slide-header { margin-bottom: 2.5rem; }
+
+#slide-12 .slide-header { margin-bottom: 2.5rem; }
+#slide-12 .grid-2 { max-width: 900px; margin-inline: auto; }
+#slide-12 .v-stack { gap: 1.6rem; }
+#slide-12 .stick-figure-wrapper img.reaction-sticker { height: 300px; max-width: 400px; }
+
+/* Slide 18: follow slide 17's minimal, no-colour editorial look. */
+#slide-18 .slide-header { margin-bottom: 2.25rem; }
+#slide-18 .ab-grid {
+  max-width: 880px;
+  margin-inline: auto;
+  gap: 4rem;
+}
+#slide-18 .ab-panel {
+  background: transparent;
+  padding: 1.7rem 0;
+  border-radius: 0;
+  align-items: center;
+  text-align: center;
+}
+#slide-18 .ab-panel[data-verdict]::before { display: none; }
+#slide-18 .ab-label { color: var(--text-tertiary); }
+#slide-18 .tick-list.bad,
+#slide-18 .tick-list.good { align-items: center; }
+#slide-18 .tick-list li { padding-left: 0; }
+#slide-18 .tick-list li::before { display: none; }
+#slide-18 .li-emoji { margin-right: 0.5rem; }
+#slide-18 .tick-list.bad li::before,
+#slide-18 .tick-list.good li::before { background: var(--text-tertiary); }
 #slide-10 .slide-body,
 #slide-14 .slide-body,
 #slide-15 .slide-body,
@@ -1101,6 +1264,9 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-52 .step-list li,
 #slide-57 .step-list li { font-size: 1rem; }
 #slide-49 .story-body { font-size: 1rem; line-height: 1.42; }
+#slide-43 .slide-header { margin-bottom: 2.5rem; }
+#slide-43 .slide-body { gap: 2.5rem; }
+#slide-43 .tell-grid { gap: 1.6rem 3.5rem; }
 
 /* Keep activity slides legible without making them look like dashboards. */
 [data-mode="activity"] .slide-header,
@@ -1112,6 +1278,125 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-56 .apple-card p { font-size: 0.88rem; }
 #slide-56 .tick-list { gap: 0.45rem; }
 #slide-56 .tick-list li { font-size: 0.9rem; }
+
+/* =========================================================
+   Scale layer
+
+   Everything below replaces a style="" attribute that used to live in
+   index.html. The rule is simple: a slide picks a step, never a value.
+   If a new slide needs a size that is not here, the scale is what
+   changes - not the slide.
+   ========================================================= */
+
+/* ---------- Type ---------- */
+.t-2xs  { font-size: var(--t-2xs); }
+.t-xs   { font-size: var(--t-xs); }
+.t-sm   { font-size: var(--t-sm); }
+.t-base { font-size: var(--t-base); }
+.t-md   { font-size: var(--t-md); }
+.t-lg   { font-size: var(--t-lg); }
+.t-xl   { font-size: var(--t-xl); }
+.t-2xl  { font-size: var(--t-2xl); }
+
+/* Ink. Named for the role the text plays, not the grey it happens to be. */
+.ink-main  { color: var(--text-primary); }
+.ink-muted { color: var(--text-secondary); }
+.ink-dim   { color: var(--text-tertiary); }
+.ink-amber { color: var(--amber); }
+
+/* Voice. The deck reads in Source Serif; sans and mono are deliberate
+   departures for annotation and for code. */
+.voice-sans { font-family: var(--font-sans); }
+.voice-mono { font-family: var(--font-mono); }
+
+/* An annotation is the aside in the margin of the talk: sans, small,
+   quiet. It was the single most-copied inline style in the deck. */
+.annotation {
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--t-base);
+  line-height: 1.5;
+}
+.annotation.is-tight { font-size: var(--t-sm); }
+
+/* Uppercase tracked label, the deck's quietest signpost. */
+.label-caps {
+  margin-bottom: var(--sp-3);
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Measure ---------- */
+.measure-tight { max-width: var(--measure-tight); }
+.measure       { max-width: var(--measure-base); }
+.measure-wide  { max-width: var(--measure-wide); }
+
+/* ---------- Rhythm ---------- */
+.mt-2 { margin-top: var(--sp-2); }
+.mt-4 { margin-top: var(--sp-4); }
+.mb-2 { margin-bottom: var(--sp-2); }
+.mb-4 { margin-bottom: var(--sp-4); }
+.mb-6 { margin-bottom: var(--sp-6); }
+
+/* ---------- Layout ----------
+   The vertical stack was hand-written eighteen times with four
+   different gaps. One class, gap chosen from the scale. */
+.v-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--stack-gap, var(--sp-6));
+}
+.v-stack.gap-4 { --stack-gap: var(--sp-4); }
+.v-stack.gap-5 { --stack-gap: var(--sp-5); }
+.v-stack.gap-6 { --stack-gap: var(--sp-6); }
+.v-stack.is-centered { align-items: center; }
+.v-stack.is-top { justify-content: flex-start; }
+
+/* A row that pushes its two ends apart and wraps rather than crushes. */
+.split-row {
+  display: flex;
+  gap: var(--sp-7);
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.split-row.is-packed { justify-content: flex-start; }
+
+/* ---------- Pull quote ----------
+   A line of speech lifted out of the flow, marked by the signal colour.
+   The rule is a typographic device on running text, not a card accent. */
+.pull-quote {
+  padding-left: var(--sp-4);
+  border-left: var(--rule-quote) solid var(--amber);
+  color: var(--text-primary);
+  font-size: var(--t-lg);
+  line-height: 1.45;
+}
+.pull-quote.is-lg { font-size: var(--t-xl); }
+
+/* ---------- Emphasis ----------
+   Body copy raised to carry a point on its own. */
+.lead {
+  color: var(--text-primary);
+  font-size: var(--t-lg);
+  line-height: 1.45;
+}
+.lead.is-lg { font-size: var(--t-xl); line-height: 1.4; }
+.lead.is-xl { font-size: var(--t-2xl); line-height: 1.35; }
+
+/* ---------- Odds and ends ----------
+   Small, honest one-liners. Each replaced a repeated inline override
+   and nothing more; they are not a general utility framework. */
+.fw-bold { font-weight: 700; }
+.ta-center { text-align: center; }
+.is-packed { justify-content: flex-start; }
+.col-grow { flex: 1; min-width: 300px; }
+.dock-btn.is-square { width: 40px; height: 40px; }
 
 /* ---------- Responsive fallbacks ---------- */
 @media (max-width: 720px) {
