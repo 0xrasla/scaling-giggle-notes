@@ -1248,7 +1248,6 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-19 .slide-body,
 #slide-35 .slide-body,
 #slide-39 .slide-body,
-#slide-43 .slide-body,
 #slide-52 .slide-body,
 #slide-53 .slide-body,
 #slide-56 .slide-body,
@@ -1264,9 +1263,6 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-52 .step-list li,
 #slide-57 .step-list li { font-size: 1rem; }
 #slide-49 .story-body { font-size: 1rem; line-height: 1.42; }
-#slide-43 .slide-header { margin-bottom: 2.5rem; }
-#slide-43 .slide-body { gap: 2.5rem; }
-#slide-43 .tell-grid { gap: 1.6rem 3.5rem; }
 
 /* Slide 58 (Monday morning): give the checklist the same card presence
    as slides 6/26 instead of a bare list floating in open space. */
@@ -1431,6 +1427,64 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 .is-packed { justify-content: flex-start; }
 .col-grow { flex: 1; min-width: 300px; }
 .dock-btn.is-square { width: 40px; height: 40px; }
+
+/* ---------- Browser frame ----------
+   A chrome-window shell around a live iframe, so an embedded site
+   reads as a website and not as a raw document. */
+.browser-frame {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-mid);
+}
+.browser-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+}
+.browser-dot:nth-child(1) { background: var(--accent-red); }
+.browser-dot:nth-child(2) { background: var(--amber); }
+.browser-dot:nth-child(3) { background: var(--accent-green); }
+.browser-url {
+  flex: 1;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 0.28rem 0.8rem;
+  background: var(--bg-base);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--r-pill);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browser-frame-iframe {
+  display: block;
+  width: 100%;
+  height: 440px;
+  border: 0;
+  background: #ffffff;
+}
+#slide-43 .slide-header { margin-bottom: 1.5rem; }
+#slide-43 .slide-body { gap: 1.5rem; }
 
 /* ---------- Responsive fallbacks ---------- */
 @media (max-width: 720px) {

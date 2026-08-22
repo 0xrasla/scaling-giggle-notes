@@ -7,3 +7,5 @@ scoreboard.
 Impeccable - The best skill
 
 https://vibe-coded.lol/
+
+How do I use Bun's native Bun.SQL API with PostgreSQL in the latest version of Bun? Give me the current recommended syntax and explain the connection configuration.
