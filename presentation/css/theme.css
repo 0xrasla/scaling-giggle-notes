@@ -1,57 +1,57 @@
 /* =========================================================
    The Ceiling Is Still You - presentation system
 
-   Direction: a black-box keynote for a live workshop.
-   Warm paper type, a single signal colour, quiet surfaces,
-   and enough scale to read from the back of a room.
+   Direction: a Gruvbox-dark keynote for a live workshop.
+   Warm terminal type, an orange signal colour, quiet
+   surfaces, and enough scale to read from the back of a room.
 
    The stage is a borderless 1280 x 720 page. The surrounding
-   black is intentional: the slide should feel projected, not
+   dark is intentional: the slide should feel projected, not
    like a website card inside another website.
    ========================================================= */
 
 /* ---------- Tokens ---------- */
 :root {
-  --bg-base: #050607;
-  --bg-surface: #101316;
-  --bg-elevated: #171B1F;
-  --bg-glass: rgba(5, 6, 7, 0.90);
-  --bg-code: #080A0C;
-  --bg-code-header: #101316;
-  --letterbox-bg: #050607;
+  --bg-base: #1D2021;
+  --bg-surface: #282828;
+  --bg-elevated: #3C3836;
+  --bg-glass: rgba(29, 32, 33, 0.92);
+  --bg-code: #282828;
+  --bg-code-header: #3C3836;
+  --letterbox-bg: #1D2021;
 
-  --border-hairline: rgba(246, 242, 233, 0.08);
-  --border-mid: rgba(246, 242, 233, 0.14);
-  --border-strong: rgba(246, 242, 233, 0.24);
+  --border-hairline: rgba(168, 153, 132, 0.08);
+  --border-mid: rgba(168, 153, 132, 0.16);
+  --border-strong: rgba(168, 153, 132, 0.28);
   --border-white: var(--border-mid);
-  --border-white-strong: rgba(246, 242, 233, 0.32);
+  --border-white-strong: rgba(168, 153, 132, 0.36);
   --border-subtle: var(--border-hairline);
 
   --bg-dark: var(--bg-base);
   --bg-card: var(--bg-surface);
   --bg-card-hover: var(--bg-elevated);
 
-  --text-primary: #F4F0E8;
+  --text-primary: #EBDBB2;
   --text-main: var(--text-primary);
-  --text-secondary: #B6B3AC;
+  --text-secondary: #D5C4A1;
   --text-muted: var(--text-secondary);
-  --text-tertiary: #777A79;
+  --text-tertiary: #A89984;
   --text-dim: var(--text-tertiary);
-  --ink: #101214;
+  --ink: #1D2021;
 
   /* Kept under the old variable names for inline markup compatibility. */
-  --amber: #F17457;
+  --amber: #FE8019;
   --accent-signal: var(--amber);
   --accent-amber: var(--amber);
-  --amber-dim: #9C4435;
-  --accent-amber-soft: rgba(241, 116, 87, 0.12);
+  --amber-dim: #D65D0E;
+  --accent-amber-soft: rgba(254, 128, 25, 0.14);
 
-  --accent-green: #53C79A;
-  --accent-green-soft: rgba(83, 199, 154, 0.11);
-  --accent-red: #F17457;
-  --accent-red-soft: rgba(241, 116, 87, 0.11);
-  --accent-blue: #7FA8D8;
-  --accent-blue-soft: rgba(127, 168, 216, 0.12);
+  --accent-green: #B8BB26;
+  --accent-green-soft: rgba(184, 187, 38, 0.12);
+  --accent-red: #FB4934;
+  --accent-red-soft: rgba(251, 73, 52, 0.12);
+  --accent-blue: #83A598;
+  --accent-blue-soft: rgba(131, 165, 152, 0.12);
 
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Source Serif 4", Georgia, serif;
@@ -129,38 +129,38 @@
 }
 
 [data-theme="light"] {
-  --bg-base: #F5F1E8;
-  --bg-surface: #FBF9F3;
-  --bg-elevated: #EAE5DA;
-  --bg-glass: rgba(245, 241, 232, 0.92);
-  --bg-code: #E9E5DC;
-  --bg-code-header: #DED8CC;
-  --letterbox-bg: #F5F1E8;
+  --bg-base: #FBF1C7;
+  --bg-surface: #F9F5D7;
+  --bg-elevated: #EBDBB2;
+  --bg-glass: rgba(251, 241, 199, 0.92);
+  --bg-code: #EBDBB2;
+  --bg-code-header: #D5C4A1;
+  --letterbox-bg: #FBF1C7;
 
-  --border-hairline: rgba(20, 22, 22, 0.10);
-  --border-mid: rgba(20, 22, 22, 0.16);
-  --border-strong: rgba(20, 22, 22, 0.25);
+  --border-hairline: rgba(60, 56, 54, 0.10);
+  --border-mid: rgba(60, 56, 54, 0.16);
+  --border-strong: rgba(60, 56, 54, 0.25);
   --border-white: var(--border-mid);
-  --border-white-strong: rgba(20, 22, 22, 0.32);
+  --border-white-strong: rgba(60, 56, 54, 0.32);
   --border-subtle: var(--border-hairline);
 
-  --text-primary: #171918;
-  --text-secondary: #5C615E;
-  --text-tertiary: #898C86;
-  --ink: #171918;
+  --text-primary: #3C3836;
+  --text-secondary: #504945;
+  --text-tertiary: #7C6F64;
+  --ink: #3C3836;
 
-  --amber: #B94F38;
+  --amber: #AF3A03;
   --accent-signal: var(--amber);
   --accent-amber: var(--amber);
-  --amber-dim: #873829;
-  --accent-amber-soft: rgba(185, 79, 56, 0.11);
+  --amber-dim: #D65D0E;
+  --accent-amber-soft: rgba(175, 58, 3, 0.11);
 
-  --accent-green: #197A5A;
-  --accent-green-soft: rgba(25, 122, 90, 0.10);
-  --accent-red: #B94F38;
-  --accent-red-soft: rgba(185, 79, 56, 0.10);
-  --accent-blue: #376B9B;
-  --accent-blue-soft: rgba(55, 107, 155, 0.10);
+  --accent-green: #79740E;
+  --accent-green-soft: rgba(121, 116, 14, 0.10);
+  --accent-red: #CC241D;
+  --accent-red-soft: rgba(204, 36, 29, 0.10);
+  --accent-blue: #458588;
+  --accent-blue-soft: rgba(69, 133, 136, 0.10);
 
   --shadow-soft: 0 18px 55px rgba(20, 22, 22, 0.12);
   --shadow-card: 0 8px 20px rgba(20, 22, 22, 0.08);
@@ -192,14 +192,14 @@ body::before {
   z-index: 2900;
   background: repeating-linear-gradient(
     0deg,
-    rgba(246, 242, 233, 0.018) 0 1px,
+    rgba(235, 219, 178, 0.018) 0 1px,
     transparent 1px 4px
   );
 }
 [data-theme="light"] body::before {
   background: repeating-linear-gradient(
     0deg,
-    rgba(20, 22, 22, 0.014) 0 1px,
+    rgba(60, 56, 54, 0.014) 0 1px,
     transparent 1px 4px
   );
 }
@@ -540,7 +540,7 @@ body::before {
 .code-block.big { font-size: 1rem; line-height: 1.58; }
 .code-block.huge { font-size: 1.2rem; line-height: 1.62; }
 .code-highlight { color: var(--amber); font-weight: 600; }
-.code-keyword { color: #C8D1D3; font-weight: 600; }
+.code-keyword { color: #FABD2F; font-weight: 600; }
 .code-comment { color: var(--text-tertiary); font-style: italic; }
 .code-string { color: var(--accent-green); }
 .code-line-bad { display: block; margin: 0 -1.5rem; padding: 0 1.5rem; background: var(--accent-red-soft); border-left: 3px solid var(--accent-red); }
@@ -1055,12 +1055,12 @@ body::before {
   display: flex;
   flex-direction: column;
   padding: 3rem;
-  background: rgba(5, 6, 7, 0.96);
+  background: rgba(29, 32, 33, 0.96);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-[data-theme="light"] .overview-modal { background: rgba(245, 241, 232, 0.96); }
+[data-theme="light"] .overview-modal { background: rgba(251, 241, 199, 0.96); }
 .overview-modal.active { opacity: 1; pointer-events: auto; }
 .overview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.6rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-hairline); }
 .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; overflow-y: auto; padding-bottom: 2rem; }
@@ -1267,6 +1267,40 @@ kbd { padding: 0.18rem 0.45rem; color: var(--text-primary); background: var(--bg
 #slide-43 .slide-header { margin-bottom: 2.5rem; }
 #slide-43 .slide-body { gap: 2.5rem; }
 #slide-43 .tell-grid { gap: 1.6rem 3.5rem; }
+
+/* Slide 58 (Monday morning): give the checklist the same card presence
+   as slides 6/26 instead of a bare list floating in open space. */
+#slide-58 .slide-header { margin-bottom: 2.5rem; }
+#slide-58 .slide-body { align-items: center; }
+#slide-58 .step-list {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 2.25rem 2.75rem;
+  background: var(--bg-surface);
+  border-radius: var(--r-sm);
+  gap: 1.5rem;
+}
+#slide-58 .step-list li { font-size: 1.1rem; }
+
+/* Slides 47-50 (incident stories): more air under the title and between
+   the paragraph stack so the block doesn't read as a cramped huddle. */
+#slide-47 .slide-header,
+#slide-48 .slide-header,
+#slide-49 .slide-header,
+#slide-50 .slide-header { margin-bottom: 2.75rem; }
+#slide-47 .grid-2,
+#slide-48 .grid-2,
+#slide-49 .grid-2,
+#slide-50 .grid-2 { gap: 4rem; }
+#slide-47 .v-stack,
+#slide-48 .v-stack,
+#slide-49 .v-stack,
+#slide-50 .v-stack { gap: 1.85rem; }
+#slide-47 .stick-figure-wrapper img.reaction-sticker,
+#slide-48 .stick-figure-wrapper img.reaction-sticker,
+#slide-49 .stick-figure-wrapper img.reaction-sticker,
+#slide-50 .stick-figure-wrapper img.reaction-sticker { height: 320px; max-width: 420px; }
 
 /* Keep activity slides legible without making them look like dashboards. */
 [data-mode="activity"] .slide-header,
