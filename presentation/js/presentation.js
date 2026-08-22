@@ -1,6 +1,6 @@
 /**
  * Presentation Engine - "The Ceiling Is Still You"
- * 3-hour workshop deck: 61 slides, run-of-show notes, session timer.
+ * 3-hour workshop deck: 62 slides, run-of-show notes, session timer.
  */
 
 class PresentationController {
@@ -68,7 +68,9 @@ class PresentationController {
 
       "00:37 · THE TEMPLATE. Read it out - it's six lines and that's the point. Then the warning: the number one mistake is writing three hundred lines. Be honest about AGENTS.md vs CLAUDE.md and tell them to check their own tool's docs rather than trusting your slide. That honesty is worth more than the certainty.",
 
-      "00:38 · ACTIVITY C - WRITE YOURS NOW (7 min). 5 minutes of writing, 2 for reading out. Take two volunteers, critique kindly and live, and push them SHORTER every time. This is the moment the session stops being a talk - from here on they have a thing on their own machine.",
+      "00:38 · THE JAR. Short - two minutes, no demo. They will all hit this in week one and blame the model, so name it before they meet it. The line that does the work: \u201cit isn't getting dumber, it's getting full.\u201d Then give them the single habit: a fresh session per task, not one conversation all day. Callback later on slide 27 - this is exactly why subagents exist.",
+
+      "00:40 · ACTIVITY C - WRITE YOURS NOW (7 min). 5 minutes of writing, 2 for reading out. Take two volunteers, critique kindly and live, and push them SHORTER every time. This is the moment the session stops being a talk - from here on they have a thing on their own machine.",
 
       "00:45 · BREAK ONE (10 min). This is not a break for you. Slide stays up with Wi-Fi, install command, key link. Music on. WALK THE ROOM and unblock installs - do not sit down. Recruit the 2–3 fastest finishers as floor helpers for the rest of the day. This single move is worth more than any slide. FILL IN before the talk: the Wi-Fi name and password on this slide, plus the handout QR.",
 
@@ -84,7 +86,7 @@ class PresentationController {
 
       "01:07 · FREE VS FRONTIER. Say this honestly and it buys you enormous credibility with the seniors. Free genuinely covers everything they'll do today. You pay when the task is long, ambiguous, or spans many files.",
 
-      "01:04–01:12 · ACTIVITY D - FIRST AGENT (8 min). Runs alongside slides 25–27; put this slide up when they start. Success = a file appears that they didn't type. Floor helpers circulate, you circulate. Take a photo of the room with heads down - good content, and they love being filmed doing something.",
+      "01:04–01:12 · ACTIVITY D - FIRST AGENT (8 min). Runs alongside slides 26–28; put this slide up when they start. Success = a file appears that they didn't type. Floor helpers circulate, you circulate. Take a photo of the room with heads down - good content, and they love being filmed doing something.",
 
       "01:12 · SECTION 04 (18 min). Structure matters here: show the FAILURE first, name it second, fix it third. The before-and-after contrast is the whole segment.",
 
@@ -100,7 +102,7 @@ class PresentationController {
 
       "01:22–01:30 · ACTIVITY E - PLUG IT IN (8 min). Crucial: make them ask the question BEFORE installing and save the answer. Then install, then ask again. Then “hands up if the first answer was wrong” - most hands. They've now proved the point to themselves instead of hearing you make it. The setup command on the slide (`npx ctx7 setup --opencode` / `--claude`) walks them through login and key generation; have a fallback config ready in case the venue network blocks it.",
 
-      "01:30 · SECTION 05 - THE CENTREPIECE (22 min). The most memorable twenty minutes of the day. Everything before this was setup for the side-by-side on slide 40.",
+      "01:30 · SECTION 05 - THE CENTREPIECE (22 min). The most memorable twenty minutes of the day. Everything before this was setup for the side-by-side on slide 41.",
 
       "01:31 · THE PROBLEM. Read the list of things they retype. Watch for nods. “Every session. Every new chat. Forever.” Their own frustration is the setup.",
 
@@ -112,7 +114,7 @@ class PresentationController {
 
       "01:41 · THE LINE. “The model did not get smarter between those two runs. I just gave it taste.” This is the most quotable sentence in the whole session. Say it once, cleanly, and don't explain it.",
 
-      "01:42 · ACTIVITY F1 - AI OR HUMAN (4 min). Six pages, one at a time, from browser tabs or a folder on your desktop - three human-designed, three AI-generated, mixed order. Hands up for AI, reveal each before moving on. Keep it fast and light; it's a palate cleanser before they write code again, and slide 43 is the payoff.",
+      "01:42 · THE VIBE-CODED SITE. One embedded example instead of the six-page game. Let it scroll and don't narrate - the {{COMPANY_NAME}} placeholders and broken links do the work. Fallback: open vibe-coded.lol in a browser tab if the iframe is blocked. Bridge to the next slide: \"everything you're laughing at is on this list.\"",
 
       "01:44 · THE TELLS. Your most screenshot-able slide - expect it to travel on Instagram. Close with: “AI defaults to the average of everything it has ever seen. Average is exactly what you don't want.”",
 
