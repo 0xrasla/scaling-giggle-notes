@@ -1,6 +1,6 @@
-# The Ceiling Is Still You
+# Stop Vibe-Coding: A Hands-On AI Agent Workshop for Real Developers
 
-A three-hour hands-on workshop on building software with AI agents - and on staying the person who can tell when it's wrong.
+A three-hour hands-on workshop: go from copy-pasting out of ChatGPT to running a free AI agent on your own laptop - and leave with your first app built, plus the judgement to tell when the AI is wrong.
 
 ## What's inside
 

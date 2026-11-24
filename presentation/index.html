@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Ceiling Is Still You | 3-Hour AI Workshop</title>
+    <title>Stop Vibe-Coding: A Hands-On AI Agent Workshop for Real Developers</title>
     <meta
       name="description"
-      content="A three-hour hands-on workshop that takes developers from pasting into ChatGPT to running agents, MCP servers, and their own skills."
+      content="A three-hour hands-on workshop: go from copy-pasting out of ChatGPT to running a free AI agent on your laptop - and leave with your first app built."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400..600;1,400&display=swap"
       rel="stylesheet"
     />
 
@@ -34,6 +34,23 @@
 
     <div class="deck-container">
       <div class="slide-viewport">
+        <!-- Editor chrome: filled in by presentation.js -->
+        <header class="ed-tabs" aria-hidden="true">
+          <span class="ed-dots"><i></i><i></i><i></i></span>
+          <span class="ed-tab is-side" id="edPrev"></span>
+          <span class="ed-tab is-active" id="edTab"></span>
+          <span class="ed-tab is-side" id="edNext"></span>
+        </header>
+        <div class="ed-gutter" id="edGutter" aria-hidden="true"></div>
+        <footer class="ed-status" aria-hidden="true">
+          <span class="ed-mode" id="edMode">NORMAL</span>
+          <span class="ed-section" id="edSection"></span>
+          <span class="ed-spacer"></span>
+          <span id="edPos"></span>
+          <span id="edTime">00:00</span>
+          <span>UTF-8</span>
+          <span>Markdown</span>
+        </footer>
         <!-- ================= SEGMENT 0 · COLD OPEN ================= -->
 
         <!-- SLIDE 1: Walk-in / Title -->
@@ -41,14 +58,15 @@
           <div class="slide-header"></div>
           <div class="slide-body center">
             <span class="hero-kicker"
-              >A three-hour AI workshop for developers</span
+              >3 hours · hands-on · bring a laptop</span
             >
             <h1 class="slide-title hero-title">
-              The Ceiling Is Still <em>You</em>
+              Stop <em>Vibe-Coding</em>
             </h1>
             <p class="hero-subtitle">
-              Three hours on building software with AI agents - and on staying
-              the person who can tell when it's wrong.
+              A hands-on AI agent workshop for real developers - three hours,
+              a free agent on your own laptop, and the judgement to tell when
+              it's wrong.
             </p>
 
             <div class="hero-rule"></div>
@@ -228,16 +246,16 @@ scoreboard. <span class="code-comment">Do not make it look like AI made it.</spa
           <div class="slide-body stack">
             <ol class="step-list">
               <li>
-                <strong>An AI agent running in your terminal.</strong> Free. No
+                <strong>Your first app</strong>, built by an agent on your own
+                laptop, that you can show someone tonight.
+              </li>
+              <li>
+                <strong>A free AI agent running in your terminal.</strong> No
                 subscription, no card.
               </li>
               <li>
-                <strong>That agent connected to live documentation</strong>, so
-                it stops confidently lying about libraries.
-              </li>
-              <li>
-                <strong>Your own skill</strong>, so it builds things the way you
-                want them built instead of the way the internet averages out.
+                <strong>Live docs and your own skill</strong>, so it stops
+                lying about libraries and stops building generic-looking pages.
               </li>
               <li>
                 <strong>The judgement to tell when it's wrong</strong> - which
@@ -315,10 +333,10 @@ scoreboard. <span class="code-comment">Do not make it look like AI made it.</spa
           <div class="slide-header"></div>
           <div class="slide-body center">
             <p class="divider-num">01</p>
-            <h2 class="slide-title divider-title">The uncomfortable truth</h2>
+            <h2 class="slide-title divider-title">From chat to agent</h2>
             <p class="divider-sub">
-              AI made the work easy. It also made it very easy to never learn
-              anything.
+              Why copy-pasting from ChatGPT runs out of road - and the honest
+              catch that comes with what replaces it.
             </p>
           </div>
         </section>
@@ -454,7 +472,7 @@ scoreboard. <span class="code-comment">Do not make it look like AI made it.</spa
             <div>
               <h2 class="slide-title">Three rungs</h2>
               <p class="slide-subtitle">
-                Most of us live on rung one and assume that's what AI coding is
+                Most of us live on rung two - ChatGPT - and assume that's what AI coding is
               </p>
             </div>
           </div>
@@ -471,8 +489,8 @@ scoreboard. <span class="code-comment">Do not make it look like AI made it.</spa
               <div class="card-icon">02</div>
               <h3>Chat</h3>
               <p>
-                You copy out, you paste back. It has never seen your project, so
-                it guesses - and it guesses <em>average</em>.
+                ChatGPT, Gemini. You copy out, you paste back. It has never seen
+                your project, so it guesses - and it guesses <em>average</em>.
               </p>
             </div>
             <div class="apple-card">
@@ -749,15 +767,15 @@ scoreboard. <span class="code-comment">Do not make it look like AI made it.</spa
                 <span>AGENTS.md</span>
               </div>
               <pre><span class="code-highlight"># Project</span>
-What this is: internal dashboard for support agents
-Stack: Next.js 15, TypeScript, Postgres via Prisma
-Run it: pnpm dev
-Test it: pnpm test
+What this is: a habit tracker I'm building to learn
+Stack: one index.html - plain HTML, CSS and JavaScript
+Run it: open index.html in the browser
+Data: saved in localStorage, no server
 
 <span class="code-highlight">Rules:</span>
-- Server components by default, "use client" only when needed
-- Never add a dependency without asking first
-- Match the existing file naming, don't invent a new one</pre>
+- Keep everything in index.html until I say otherwise
+- Never add a library without asking first
+- After every change, tell me what changed in two sentences</pre>
             </div>
             <p class="pull-quote">
               The number one mistake is writing three hundred lines. A memory
@@ -814,7 +832,8 @@ Test it: pnpm test
               <span class="mode-badge">Activity C · Everyone</span>
               <h2 class="slide-title">Write yours. Right now.</h2>
               <p class="slide-subtitle">
-                Any project you actually have. Your portfolio site counts.
+                For the app you're about to build. No project yet? Make a
+                folder called my-first-app - that counts.
               </p>
             </div>
           </div>
@@ -823,7 +842,7 @@ Test it: pnpm test
               <div class="timer-badge">05:00<span>on the clock</span></div>
               <ul class="tick-list good">
                 <li>Copy the template from the previous slide</li>
-                <li>Fill in your real stack and your real commands</li>
+                <li>Change line one to the app <em>you</em> want to build</li>
                 <li>Two rules. Only two. Resist writing more</li>
                 <li>Save it as AGENTS.md in the root of the repo</li>
               </ul>
@@ -1059,24 +1078,26 @@ opencode</pre>
           <div class="slide-header">
             <div>
               <span class="mode-badge">Activity D · Everyone</span>
-              <h2 class="slide-title">Your first agent</h2>
+              <h2 class="slide-title">Your first app · v1</h2>
               <p class="slide-subtitle">
-                Success is simple: a file appears that you did not type.
+                Success is simple: an app opens in your browser and you did not
+                type a line of it.
               </p>
             </div>
           </div>
           <div class="slide-body stack">
             <div class="code-block huge">
               <pre>
-Explain what this project does in 5 bullet points,
-then build me a single-file dice roller as dice.html.</pre
+Read AGENTS.md. Build v1 of my app as index.html:
+a habit tracker where I add habits and tick them off daily.
+Save to localStorage. Ask before adding anything else.</pre
               >
             </div>
             <div class="split-row">
               <ul class="tick-list good col-grow">
-                <li>Open any folder</li>
-                <li>Start your agent</li>
-                <li>Paste that. Watch what it does before it does it</li>
+                <li>Not a habit person? Swap in an expense splitter or a reading list</li>
+                <li>Start your agent in your my-first-app folder</li>
+                <li>Paste it. Read what it plans before you say yes</li>
               </ul>
               <div class="timer-badge">08:00<span>then we move on</span></div>
             </div>
@@ -1357,7 +1378,8 @@ npx ctx7 setup --opencode
 npx ctx7 setup --claude</pre>
             </div>
             <p class="lead">
-              Then, hands up: whose first answer turned out to be wrong?
+              Then put it to work: ask your agent to add a weekly chart to your
+              app with Chart.js. Hands up - whose first answer was wrong?
             </p>
           </div>
         </section>
@@ -1673,7 +1695,8 @@ npx ctx7 setup --claude</pre>
               <span class="mode-badge">Activity F2 · Everyone</span>
               <h2 class="slide-title">Ban the cliché</h2>
               <p class="slide-subtitle">
-                Write a real skill file, on your real machine.
+                Write a real skill file, then make your app stop looking like
+                every other AI app.
               </p>
             </div>
           </div>
@@ -1682,7 +1705,7 @@ npx ctx7 setup --claude</pre>
               <ol class="step-list">
                 <li>Five rules banning the clichés you hate most</li>
                 <li>Three rules describing what you <em>do</em> want</li>
-                <li>Re-run the coffee roaster prompt with it loaded</li>
+                <li>Ask your agent to restyle <em>your app</em> with it loaded</li>
                 <li>Compare with your neighbour - whose is better, and why?</li>
               </ol>
             </div>
@@ -2091,8 +2114,8 @@ if it's a good day to code</pre
               <span class="mode-badge">Game 2 · Teams of three</span>
               <h2 class="slide-title">Build in ten</h2>
               <p class="slide-subtitle">
-                One laptop per team. Pick one. Ten minutes on the clock, then
-                demos.
+                You built one app alone today. Now build a second one, as a
+                team, in ten minutes. Then demos.
               </p>
             </div>
           </div>
@@ -2183,15 +2206,15 @@ if it's a good day to code</pre
           <div class="slide-body stack">
             <ol class="step-list">
               <li>
-                <strong>Put an AGENTS.md in your main project.</strong> Ten
-                minutes. You already wrote one today.
+                <strong>Put today's app online.</strong> GitHub Pages or
+                Netlify Drop - free, five minutes. Send the link to one person.
               </li>
               <li>
-                <strong>Install one terminal agent.</strong> Free is completely
-                fine.
+                <strong>Add one feature a day for a week.</strong> Same agent,
+                same AGENTS.md. Free is completely fine.
               </li>
               <li>
-                <strong>Add Context7.</strong> One command -
+                <strong>Keep Context7 connected.</strong> If you ever remove it -
                 <code class="voice-mono">npx ctx7 setup</code>.
               </li>
               <li>
@@ -2219,14 +2242,14 @@ if it's a good day to code</pre
               <div class="card-icon">W1</div>
               <h3>Week one</h3>
               <p>
-                Agent installed and running on a throwaway project. Break things
+                Today's app online, with one new feature a day. Break things
                 freely.
               </p>
             </div>
             <div class="apple-card">
               <div class="card-icon">W2</div>
               <h3>Week two</h3>
-              <p>AGENTS.md in every repo you own. Short ones.</p>
+              <p>A second app from scratch, with AGENTS.md from minute one.</p>
             </div>
             <div class="apple-card">
               <div class="card-icon">W3</div>
@@ -2239,7 +2262,7 @@ if it's a good day to code</pre
             <div class="apple-card">
               <div class="card-icon">W4</div>
               <h3>Week four</h3>
-              <p>One real feature, shipped, that you reviewed line by line.</p>
+              <p>One app somebody else actually uses - reviewed line by line.</p>
             </div>
           </div>
         </section>
@@ -2297,8 +2320,9 @@ if it's a good day to code</pre
                 </div>
               </div>
               <p class="t-md ink-muted">
-                The resource pack has the slides, every skill we wrote, the MCP
-                configs, and the reading list for all five stories.
+                The resource pack has the slides, the starter AGENTS.md, every
+                skill we wrote, the MCP configs, and the reading list for all
+                five stories.
               </p>
             </div>
           </div>
@@ -2389,26 +2413,6 @@ if it's a good day to code</pre
         </svg>
       </button>
 
-      <button class="dock-btn" id="themeBtn" title="Toggle Theme (T)">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <circle cx="12" cy="12" r="5" />
-          <line x1="12" y1="1" x2="12" y2="3" />
-          <line x1="12" y1="21" x2="12" y2="23" />
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-          <line x1="1" y1="12" x2="3" y2="12" />
-          <line x1="21" y1="12" x2="23" y2="12" />
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </svg>
-      </button>
 
       <button class="dock-btn" id="fullscreenBtn" title="Toggle Fullscreen (F)">
         <svg
@@ -2522,10 +2526,6 @@ if it's a good day to code</pre
         <div class="shortcut-row">
           <span>Blank Screen (Blackout)</span>
           <div><kbd>B</kbd></div>
-        </div>
-        <div class="shortcut-row">
-          <span>Toggle Dark / Light Theme</span>
-          <div><kbd>T</kbd></div>
         </div>
         <div class="shortcut-row">
           <span>Reset Session Timer</span>

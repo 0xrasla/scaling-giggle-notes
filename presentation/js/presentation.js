@@ -1,5 +1,5 @@
 /**
- * Presentation Engine - "The Ceiling Is Still You"
+ * Presentation Engine - "Stop Vibe-Coding: A Hands-On AI Agent Workshop for Real Developers"
  * 3-hour workshop deck: 62 slides, run-of-show notes, session timer.
  */
 
@@ -40,17 +40,17 @@ class PresentationController {
 
       "00:08 · THE FAILURE STORY. Sixty seconds. Non-negotiable. The slide is intentionally almost empty - the story is spoken, not read. The bug that took three days and was a typo, or the thing you shipped that broke production. Do not clean it up to look good - the messier it is, the better it works. This is what turns a webinar into a person talking.",
 
-      "00:10 · THE PROMISE. Read all four out loud, slowly. Point at the fourth one: “that last one is the only thing here nobody can install for you.” This sets up the whole arc - the tools are the easy part.",
+      "00:10 · THE PROMISE. Read all four out loud, slowly. Land the first one: everybody leaves with an app they built today - that is the title of the talk, so say it. Then point at the fourth one: “that last one is the only thing here nobody can install for you.” This sets up the whole arc - the tools are the easy part.",
 
       "00:11 · ACTIVITY A - THE HAND FUNNEL (2 min). Ask in order. Insist they KEEP hands up. Watch the room physically drain from every hand to zero. Then: “Look around. Everything above where the hands dropped is what everyone already does. Everything below is where the leverage is.” This is your entire thesis, made by them, in ninety seconds.",
 
       "00:12 · CALLBACK. Switch back to the terminal - the cold open has finished. Show the result. “That got built while I was introducing myself, by the thing most of your hands went down for.” Then straight into Section 01.",
 
-      "00:13 · SECTION 01 (17 min). This segment earns you the right to teach tools later. You are showing them you're not selling. Do not rush it.",
+      "00:13 · SECTION 01 - FROM CHAT TO AGENT (17 min). Most of the room uses ChatGPT - start from there. This segment earns you the right to teach tools later. You are showing them you're not selling. Do not rush it.",
 
       "00:14 · WHAT CHANGED. Land the last row hard: the bottleneck moved from how fast you can WRITE to how fast you can REVIEW. Everything else on this slide is setup for that one line.",
 
-      "00:18 · THE LADDER. Point out that most of the room lives on rung one and thinks that IS AI coding. The distinction that matters: rung three closes its own loop - it checks its work and goes again. Don't define agent by autonomy, define it by the loop.",
+      "00:18 · THE LADDER. Point out that most of the room lives on rung two - ChatGPT in a browser tab - and thinks that IS AI coding. The distinction that matters: rung three closes its own loop - it checks its work and goes again. Don't define agent by autonomy, define it by the loop.",
 
       "00:21 · THE TRAP. Slow down here. This is the honest part and the seniors in the room will be watching to see if you say it. The risk to a junior career isn't replacement - it's losing the ability to tell good code from code that merely runs.",
 
@@ -66,11 +66,11 @@ class PresentationController {
 
       "00:34 · LIVE DEMO - SAME PROMPT TWICE. Run A with no memory file, Run B with one. Show both outputs on screen together. Do NOT talk over it explaining - let them watch and reach the conclusion first. Fallback: pre-baked output files on the desktop.",
 
-      "00:37 · THE TEMPLATE. Read it out - it's six lines and that's the point. Then the warning: the number one mistake is writing three hundred lines. Be honest about AGENTS.md vs CLAUDE.md and tell them to check their own tool's docs rather than trusting your slide. That honesty is worth more than the certainty.",
+      "00:37 · THE TEMPLATE. Read it out - it's the AGENTS.md for the app we build today, and it's short on purpose. Then the warning: the number one mistake is writing three hundred lines. Be honest about AGENTS.md vs CLAUDE.md and tell them to check their own tool's docs rather than trusting your slide. That honesty is worth more than the certainty.",
 
       "00:38 · THE JAR. Short - two minutes, no demo. They will all hit this in week one and blame the model, so name it before they meet it. The line that does the work: \u201cit isn't getting dumber, it's getting full.\u201d Then give them the single habit: a fresh session per task, not one conversation all day. Callback later on slide 27 - this is exactly why subagents exist.",
 
-      "00:40 · ACTIVITY C - WRITE YOURS NOW (7 min). 5 minutes of writing, 2 for reading out. Take two volunteers, critique kindly and live, and push them SHORTER every time. This is the moment the session stops being a talk - from here on they have a thing on their own machine.",
+      "00:40 · ACTIVITY C - WRITE YOURS NOW (7 min). Everyone makes a my-first-app folder and writes the AGENTS.md for the app they will build at 01:04. 5 minutes of writing, 2 for reading out. Take two volunteers, critique kindly and live, and push them SHORTER every time. This is the moment the session stops being a talk - from here on they have a thing on their own machine.",
 
       "00:45 · BREAK ONE (10 min). This is not a break for you. Slide stays up with Wi-Fi, install command, key link. Music on. WALK THE ROOM and unblock installs - do not sit down. Recruit the 2–3 fastest finishers as floor helpers for the rest of the day. This single move is worth more than any slide. FILL IN before the talk: the Wi-Fi name and password on this slide, plus the handout QR.",
 
@@ -86,7 +86,7 @@ class PresentationController {
 
       "01:07 · FREE VS FRONTIER. Say this honestly and it buys you enormous credibility with the seniors. Free genuinely covers everything they'll do today. You pay when the task is long, ambiguous, or spans many files.",
 
-      "01:04–01:12 · ACTIVITY D - FIRST AGENT (8 min). Runs alongside slides 26–28; put this slide up when they start. Success = a file appears that they didn't type. Floor helpers circulate, you circulate. Take a photo of the room with heads down - good content, and they love being filmed doing something.",
+      "01:04–01:12 · ACTIVITY D - FIRST APP v1 (8 min). Runs alongside slides 26–28; put this slide up when they start. This is the moment the title promised - say so. Success = their app opens in the browser and they didn't type it. Habit tracker is the default; expense splitter or reading list are fine swaps. Floor helpers circulate, you circulate. Take a photo of the room with heads down - good content, and they love being filmed doing something.",
 
       "01:12 · SECTION 04 (18 min). Structure matters here: show the FAILURE first, name it second, fix it third. The before-and-after contrast is the whole segment.",
 
@@ -100,7 +100,7 @@ class PresentationController {
 
       "01:24 · SAFETY - SAY THIS DELIBERATELY. “Install the ones you'd trust with your SSH keys, because that IS the trust level.” This is the seed for the stories after the break. Plant it on purpose and don't rush past it.",
 
-      "01:22–01:30 · ACTIVITY E - PLUG IT IN (8 min). Crucial: make them ask the question BEFORE installing and save the answer. Then install, then ask again. Then “hands up if the first answer was wrong” - most hands. They've now proved the point to themselves instead of hearing you make it. The setup command on the slide (`npx ctx7 setup --opencode` / `--claude`) walks them through login and key generation; have a fallback config ready in case the venue network blocks it.",
+      "01:22–01:30 · ACTIVITY E - PLUG IT IN (8 min). Crucial: make them ask the question BEFORE installing and save the answer. Then install, then ask again. Then they use it on their own app: add a weekly Chart.js chart. Then “hands up if the first answer was wrong” - most hands. They've now proved the point to themselves instead of hearing you make it. The setup command on the slide (`npx ctx7 setup --opencode` / `--claude`) walks them through login and key generation; have a fallback config ready in case the venue network blocks it.",
 
       "01:30 · SECTION 05 - THE CENTREPIECE (22 min). The most memorable twenty minutes of the day. Everything before this was setup for the side-by-side on slide 41.",
 
@@ -118,7 +118,7 @@ class PresentationController {
 
       "01:44 · THE TELLS. Your most screenshot-able slide - expect it to travel on Instagram. Close with: “AI defaults to the average of everything it has ever seen. Average is exactly what you don't want.”",
 
-      "01:45 · ACTIVITY F2 - BAN THE CLICHÉ (7 min). Real file, real machine, five bans and three wants. Re-run the coffee shop prompt. Compare with a neighbour. Close with: “You just did the thing that almost nobody using AI ever does - you stopped accepting the default.”",
+      "01:45 · ACTIVITY F2 - BAN THE CLICHÉ (7 min). Real file, real machine, five bans and three wants. Restyle their own app with the skill loaded. Compare with a neighbour. Close with: “You just did the thing that almost nobody using AI ever does - you stopped accepting the default.”",
 
       "01:52 · BREAK TWO (8 min). Short, to keep energy up. Slide asks them to post what they built and tag you - free content, and it makes the room feel like a cohort. Line up the story slides and dim the lights DURING the break, not after it.",
 
@@ -146,7 +146,7 @@ class PresentationController {
 
       "02:42 · GAME 3 - RAPID FIRE (6 min). Eight questions, hands up, first correct answer scores. Loud and fast, do not dwell. This is a disguised recap of everything you taught - that's why it's last.",
 
-      "02:48 · MONDAY MORNING. In this order. The whole list is about ninety minutes of work - say that, because it makes it feel doable rather than aspirational.",
+      "02:48 · MONDAY MORNING. In this order. Item one is the big one - an app online with a link they can send tonight. The whole list is about ninety minutes of work - say that, because it makes it feel doable rather than aspirational.",
 
       "02:51 · THE 30 DAYS. Keep it quick. The point is that week four is the only one that matters: one real feature, shipped, reviewed line by line.",
 
@@ -159,6 +159,8 @@ class PresentationController {
   }
 
   init() {
+    this.tagAnimations();
+    this.buildEditorChrome();
     this.buildOverviewGrid();
     this.bindEvents();
     this.fitDeck();
@@ -166,6 +168,56 @@ class PresentationController {
     this.handleHashNavigation();
     this.goToSlide(this.currentIndex, true);
     this.startTimer();
+  }
+
+  /** Editor-window chrome: a file name per slide, the section each slide
+   *  belongs to (taken from the divider slides), and the gutter numbers. */
+  buildEditorChrome() {
+    let section = '00 · Intro';
+    this.files = [];
+    this.sections = this.slides.map((slide, i) => {
+      const num = slide.querySelector('.divider-num');
+      if (num) section = `${num.textContent.trim()} · ${slide.querySelector('.divider-title')?.textContent.trim() || ''}`;
+      const title = slide.querySelector('.slide-title')?.textContent.trim() || `slide ${i + 1}`;
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 26).replace(/-$/, '');
+      this.files.push(i === 0 ? 'README.md' : `${String(i + 1).padStart(2, '0')}-${slug}.md`);
+      return section;
+    });
+    const gutter = document.getElementById('edGutter');
+    if (gutter) gutter.innerHTML = Array.from({ length: 26 }, (_, n) => `<span>${n + 1}</span>`).join('');
+  }
+
+  updateEditorChrome() {
+    const i = this.currentIndex;
+    const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    set('edPrev', this.files[i - 1] || '');
+    set('edTab', this.files[i]);
+    set('edNext', this.files[i + 1] || '');
+    set('edSection', this.sections[i]);
+    set('edPos', `Ln ${i + 1}, Col 1 · ${i + 1}/${this.totalSlides}`);
+    const mode = this.slides[i].dataset.mode || 'normal';
+    const modeEl = document.getElementById('edMode');
+    if (modeEl) { modeEl.textContent = mode.toUpperCase(); modeEl.dataset.mode = mode; }
+  }
+
+  /** Number each content block in reading order, so CSS can stagger the
+   *  entrance animation (see "Entrance motion" in theme.css). */
+  tagAnimations() {
+    const units = [
+      '.slide-header .mode-badge', '.slide-header .slide-title', '.slide-header .slide-subtitle',
+      '.slide-body.center > *', '.slide-body.stack > *',
+      '.grid-2 > *', '.grid-3 > *', '.grid-4 > *', '.comparison-container > *', '.ab-grid > *',
+      '.step-list > li', '.tick-list > li', '.funnel > li', '.vote-list > li', '.tell-grid > li',
+      '.comparison-list > li', '.qr-slot', '.hero-foot',
+    ].join(',');
+    this.slides.forEach((slide) => {
+      let i = 0;
+      slide.querySelectorAll(units).forEach((el) => {
+        if (el.matches('.reaction-sticker')) return; // stickers have their own pop
+        el.setAttribute('data-anim', '');
+        el.style.setProperty('--i', Math.min(i++, 12));
+      });
+    });
   }
 
   /** Scale the fixed 1280×720 stage to fit inside the window, keeping
@@ -190,7 +242,6 @@ class PresentationController {
     document.getElementById('overviewBtn')?.addEventListener('click', () => this.toggleOverview());
     document.getElementById('notesBtn')?.addEventListener('click', () => this.toggleNotes());
     document.getElementById('fullscreenBtn')?.addEventListener('click', () => this.toggleFullscreen());
-    document.getElementById('themeBtn')?.addEventListener('click', () => this.toggleTheme());
     document.getElementById('helpBtn')?.addEventListener('click', () => this.toggleShortcuts());
     document.getElementById('closeOverview')?.addEventListener('click', () => this.toggleOverview(false));
     document.getElementById('closeShortcuts')?.addEventListener('click', () => this.toggleShortcuts(false));
@@ -264,10 +315,6 @@ class PresentationController {
       case 'H':
         this.toggleShortcuts();
         break;
-      case 't':
-      case 'T':
-        this.toggleTheme();
-        break;
       case 'Escape':
         this.closeAllModals();
         break;
@@ -290,19 +337,13 @@ class PresentationController {
     if (targetIndex < 0 || targetIndex >= this.totalSlides) return;
     if (targetIndex === this.currentIndex && !force) return;
 
-    const performUpdate = () => {
-      this.slides.forEach((slide, idx) => {
-        slide.classList.toggle('active', idx === targetIndex);
-      });
-      this.currentIndex = targetIndex;
-      this.updateUI();
-    };
-
-    if (document.startViewTransition && !force) {
-      document.startViewTransition(performUpdate);
-    } else {
-      performUpdate();
-    }
+    // CSS owns the transition (see .slide in theme.css). No View Transition
+    // on top: it double-fades and snaps when you press keys quickly.
+    this.slides.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === targetIndex);
+    });
+    this.currentIndex = targetIndex;
+    this.updateUI();
   }
 
   updateUI() {
@@ -324,6 +365,7 @@ class PresentationController {
     }
 
     window.location.hash = `slide-${this.currentIndex + 1}`;
+    this.updateEditorChrome();
 
     if (this.notesContent) {
       this.notesContent.textContent = this.speakerNotes[this.currentIndex] || 'No notes for this slide.';
@@ -405,11 +447,6 @@ class PresentationController {
     }
   }
 
-  toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    document.documentElement.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
-  }
-
   closeAllModals() {
     this.toggleOverview(false);
     this.toggleShortcuts(false);
@@ -435,6 +472,8 @@ class PresentationController {
     const label = `${minutes}:${seconds}`;
 
     if (this.notesTimer) this.notesTimer.textContent = label;
+    const edTime = document.getElementById('edTime');
+    if (edTime) edTime.textContent = `⏱ ${label}`;
     if (this.dockTimer) {
       this.dockTimer.textContent = label;
       this.dockTimer.classList.toggle('over', elapsedSec > this.sessionLengthSec);

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kopi Kade — Ceylon coffee, roasted in Colombo</title>
+<meta name="description" content="Kopi Kade is a specialty kopi kade in Colombo pouring the revival of Ceylon coffee — the island that grew the world's coffee before the 1869 rust. Estate beans, roasted on Galle Road, served in a blue-rim enamel cup." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ivory: #f2ead9;
+    --paper: #faf5ea;
+    --ink: #201812;
+    --ink-soft: #5a4c3a;
+    --enamel: #2050ae;
+    --enamel-deep: #173a82;
+    --jaggery: #b9812a;
+    --rust: #a6402b;
+    --line: rgba(32, 24, 18, 0.16);
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Newsreader", Georgia, serif;
+    --font-mono: "Space Mono", ui-monospace, monospace;
+    --rim: 5px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--ivory);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--enamel); color: var(--paper); }
+
+  a { color: inherit; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap { width: min(1140px, 92%); margin-inline: auto; }
+
+  /* ---------------- Header ---------------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--ivory);
+    border-top: var(--rim) solid var(--enamel);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .wordmark .si { font-family: var(--font-mono); font-weight: 400; font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+
+  .nav-links a:hover { color: var(--enamel); }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .nav-toggle[aria-expanded="true"] { color: var(--paper); background: var(--enamel); border-color: var(--enamel); }
+
+  /* ---------------- Hero ---------------- */
+  .hero { padding: clamp(64px, 9vw, 120px) 0 0; position: relative; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--enamel-deep);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+
+  .hero-eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 3px;
+    background: var(--enamel);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.7rem, 6.4vw, 5.3rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .dim { color: var(--enamel-deep); }
+
+  .hero-lede {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 32px;
+  }
+
+  .hero-lede strong { color: var(--ink); font-weight: 600; }
+
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 34px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-cobalt { background: var(--enamel); color: var(--paper); }
+  .btn-cobalt:hover { background: var(--enamel-deep); }
+
+  .btn-ghost { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn-ghost:hover { background: var(--ink); color: var(--ivory); }
+
+  .hero-stamp {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-stamp b { color: var(--rust); font-weight: 700; }
+
+  /* Hero cup */
+  .hero-cup { position: relative; display: grid; place-items: center; padding: 12px 0 0; }
+
+  .cup-wrap { position: relative; width: min(340px, 84%); }
+
+  .cup-svg { width: 100%; height: auto; }
+
+  .steam {
+    animation: rise 3.4s ease-in-out infinite;
+  }
+  .steam.s2 { animation-delay: 1.1s; }
+  .steam.s3 { animation-delay: 2.2s; }
+
+  @keyframes rise {
+    0%   { opacity: 0; transform: translateY(6px); }
+    35%  { opacity: 0.85; }
+    100% { opacity: 0; transform: translateY(-22px); }
+  }
+
+  .cup-float { animation: bob 6s ease-in-out infinite; }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  .cup-caption {
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  /* ---------------- Section chrome ---------------- */
+  section { padding: clamp(72px, 10vw, 120px) 0; }
+
+  .rim-band {
+    height: var(--rim);
+    background: var(--enamel);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--enamel-deep);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-label::before { content: ""; width: 26px; height: 3px; background: var(--enamel); }
+
+  .section-label.on-dark { color: #c9d8f2; }
+  .section-label.on-dark::before { background: var(--jaggery); }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin-bottom: 18px;
+  }
+
+  .section-sub { font-size: clamp(1rem, 1.4vw, 1.15rem); color: var(--ink-soft); max-width: 56ch; }
+
+  /* ---------------- The 1869 (story) ---------------- */
+  .story { background: var(--ivory); }
+
+  .story-head { margin-bottom: 56px; }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .story-body p { font-size: 1.06rem; color: var(--ink-soft); margin-bottom: 18px; max-width: 56ch; }
+  .story-body p strong { color: var(--ink); font-weight: 600; }
+
+  .rust-thread { margin-top: 30px; }
+
+  .rust-thread .tick {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .rust-thread .tick:last-child { border-bottom: 1px solid var(--line); }
+
+  .rust-thread .year {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--rust);
+    letter-spacing: -0.01em;
+  }
+
+  .rust-thread .desc { font-size: 0.98rem; color: var(--ink-soft); padding-top: 5px; }
+  .rust-thread .desc b { color: var(--ink); font-weight: 600; }
+
+  .pull-line {
+    margin-top: 44px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 26ch;
+  }
+
+  .pull-line em { color: var(--enamel-deep); font-style: normal; }
+
+  /* ---------------- The Board (menu) ---------------- */
+  .board { background: var(--ink); color: var(--ivory); }
+
+  .board-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 52px; }
+
+  .board .section-title { color: var(--ivory); }
+  .board .section-sub { color: rgba(242, 234, 217, 0.72); }
+
+  .board-note { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--jaggery); }
+
+  .menu-list { max-width: 780px; }
+
+  .menu-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid rgba(242, 234, 217, 0.18);
+    transition: padding-left 0.2s ease;
+  }
+
+  .menu-row:hover { padding-left: 10px; }
+
+  .menu-row:last-child { border-bottom: 1px solid rgba(242, 234, 217, 0.18); }
+
+  .menu-name {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    letter-spacing: -0.01em;
+  }
+
+  .menu-name .si { font-family: var(--font-mono); font-weight: 400; font-size: 0.62rem; color: rgba(242, 234, 217, 0.5); letter-spacing: 0.02em; }
+
+  .menu-desc { color: rgba(242, 234, 217, 0.72); font-size: 1rem; margin-top: 6px; max-width: 52ch; }
+
+  .menu-data {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: #c9d8f2;
+    margin-top: 10px;
+  }
+
+  .menu-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--jaggery);
+    white-space: nowrap;
+    align-self: start;
+    padding-top: 4px;
+  }
+
+  /* ---------------- The Estates (origin) ---------------- */
+  .estates { background: var(--ivory); }
+
+  .estates-head { margin-bottom: 48px; }
+
+  .lot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .lot {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: var(--rim) solid var(--enamel);
+    padding: 26px 24px 24px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+  }
+
+  .lot:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -22px rgba(32, 24, 18, 0.4); }
+
+  .lot .lot-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .lot .lot-tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--enamel-deep); margin-bottom: 18px; }
+
+  .lot .lot-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  .lot .lot-meta b { color: var(--ink); font-weight: 700; }
+
+  .estates-foot {
+    margin-top: 40px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ---------------- Visit ---------------- */
+  .visit { background: var(--enamel); color: var(--paper); }
+
+  .visit-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .visit .section-label { color: #d9e4f6; }
+  .visit .section-label::before { background: var(--paper); }
+  .visit .section-title { color: var(--paper); }
+  .visit .section-sub { color: rgba(250, 245, 234, 0.82); }
+
+  .visit-copy .section-title { margin-bottom: 26px; }
+
+  .visit-meta { display: grid; gap: 6px; margin-top: 8px; }
+
+  .visit-meta .vm {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: rgba(250, 245, 234, 0.92);
+    padding: 9px 0;
+    border-top: 1px solid rgba(250, 245, 234, 0.24);
+  }
+
+  .visit-meta .vm:last-child { border-bottom: 1px solid rgba(250, 245, 234, 0.24); }
+
+  .visit-meta .vm b { color: var(--paper); font-weight: 700; }
+
+  .visit-hours { margin-top: 26px; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.05em; line-height: 1.9; color: #d9e4f6; }
+
+  .visit-cta { margin-top: 30px; }
+
+  .btn-paper { background: var(--paper); color: var(--enamel-deep); }
+  .btn-paper:hover { background: #fff; }
+
+  /* Mini cup motif for visit */
+  .visit-cup { display: grid; place-items: center; }
+
+  .visit-cup .cup-svg { width: min(260px, 80%); }
+
+  /* ---------------- Footer ---------------- */
+  .site-footer { background: var(--ink); color: rgba(242, 234, 217, 0.72); border-bottom: var(--rim) solid var(--enamel); }
+
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 22px; padding: 34px 0; }
+
+  .footer-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--ivory); }
+
+  .footer-brand .si { font-family: var(--font-mono); font-weight: 400; font-size: 0.7rem; color: rgba(242, 234, 217, 0.55); }
+
+  .footer-tag { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--jaggery); }
+
+  .footer-note { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; color: rgba(242, 234, 217, 0.5); }
+
+  /* ---------------- Focus / motion ---------------- */
+  :focus-visible { outline: 3px solid var(--enamel); outline-offset: 3px; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .steam, .cup-float { animation: none !important; }
+    html.js .reveal { opacity: 1; transform: none; transition: none; }
+    .menu-row:hover { padding-left: 0; }
+    .lot:hover { transform: none; box-shadow: none; }
+    .btn:hover, .btn { transition: none; transform: none; }
+  }
+
+  /* ---------------- Responsive ---------------- */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-cup { order: -1; margin-bottom: 8px; }
+    .cup-wrap { width: min(300px, 76%); }
+
+    .story-grid { grid-template-columns: 1fr; }
+
+    .visit-grid { grid-template-columns: 1fr; }
+    .visit-cup { order: -1; }
+
+    .lot-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      position: fixed;
+      inset: 0;
+      top: 0;
+      background: var(--ivory);
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      font-size: 1.2rem;
+      z-index: 50;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links.open { transform: translateY(0); }
+
+    .nav-links a { font-size: 1.05rem; }
+
+    .nav-toggle { display: block; position: relative; z-index: 60; }
+
+    .nav { position: relative; }
+
+    .wordmark .si { display: none; }
+
+    .menu-row { grid-template-columns: 1fr; gap: 10px; }
+    .menu-price { align-self: start; }
+
+    .hero h1 { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+  }
+</style>
+</head>
+<body>
+<a class="sr-only" href="#board">Skip to menu</a>
+
+<header class="site-header" id="top">
+  <nav class="nav wrap" aria-label="Primary">
+    <a class="wordmark" href="#top">Kopi Kade <span class="si" lang="si">කෝපි කඩේ</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">+</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#board">Board</a></li>
+      <li><a href="#story">The 1869</a></li>
+      <li><a href="#estates">Estates</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-eyebrow">Colombo · Est. 2021 · කෝපි කඩේ</p>
+        <h1 id="hero-title">The island that grew the world's coffee<span class="dim">, before tea.</span></h1>
+        <p class="hero-lede">
+          Before tea claimed the hills, Ceylon was the world's coffee farm — until the rust of <strong>1869</strong>
+          took the harvest and the planters planted tea. Kopi Kade roasts the revival: estate-grown Ceylon beans,
+          roasted five minutes from the sea, poured into a <strong>blue-rim enamel cup</strong> the way the kade always did.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-cobalt" href="#board">See the board</a>
+          <a class="btn btn-ghost" href="#story">The 1869 story</a>
+        </div>
+        <p class="hero-stamp">
+          <span>ROASTED 03.08 · KANDY ESTATE · WASHED · CITY+</span>
+          <b>●</b>
+          <span>Rs 350 / cup</span>
+        </p>
+      </div>
+
+      <div class="hero-cup">
+        <div class="cup-wrap cup-float">
+          <svg class="cup-svg" viewBox="0 0 300 360" role="img" aria-label="A white enamel cup with a cobalt rim, filled with black coffee and rising steam">
+            <!-- steam -->
+            <path class="steam" d="M122 78 C118 60 132 52 126 34" fill="none" stroke="#5a4c3a" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+            <path class="steam s2" d="M150 84 C146 66 160 58 154 40" fill="none" stroke="#5a4c3a" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+            <path class="steam s3" d="M178 78 C174 60 188 52 182 34" fill="none" stroke="#5a4c3a" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+            <!-- saucer shadow -->
+            <ellipse cx="150" cy="318" rx="118" ry="14" fill="#201812" opacity="0.12"/>
+            <!-- saucer -->
+            <ellipse cx="150" cy="308" rx="116" ry="16" fill="#e7dcc4"/>
+            <ellipse cx="150" cy="304" rx="116" ry="16" fill="#faf5ea"/>
+            <!-- cup body -->
+            <path d="M90 112 L210 112 L202 258 Q150 272 98 258 Z" fill="#faf5ea" stroke="#201812" stroke-width="2"/>
+            <!-- base ring -->
+            <path d="M102 246 L198 246 L200 252 Q150 262 100 252 Z" fill="#2050ae"/>
+            <!-- enamel rim band -->
+            <path d="M90 118 L210 118 L208 140 Q150 149 92 140 Z" fill="#2050ae"/>
+            <!-- coffee surface, filling the mouth above the band -->
+            <ellipse cx="150" cy="113" rx="54" ry="9" fill="#201812"/>
+            <ellipse cx="150" cy="111" rx="50" ry="7" fill="#3a2e24"/>
+          </svg>
+        </div>
+        <p class="cup-caption">Enamel cup · rim &amp; base in cobalt</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rim-band" aria-hidden="true"></div>
+
+  <!-- ================= THE 1869 ================= -->
+  <section class="story" id="story" aria-labelledby="story-title">
+    <div class="wrap story-grid">
+      <div class="story-head reveal">
+        <p class="section-label">The 1869</p>
+        <h2 class="section-title" id="story-title">A fungus the size of a thumbprint ended an empire.</h2>
+        <p class="section-sub">The island that fed the world's coffee habit lost it all in a single decade.</p>
+      </div>
+
+      <div class="story-body reveal">
+        <p>
+          In 1869, coffee rust — <strong>Hemileia vastatrix</strong> — reached Ceylon's wet hills. The island was then the
+          world's largest coffee producer; within a decade the plantations were gone. The planters ripped out the coffee
+          and planted <strong>tea</strong>. The world moved on.
+        </p>
+        <p>The kades didn't.</p>
+
+        <div class="rust-thread">
+          <div class="tick"><span class="year">1869</span><span class="desc"><b>The rust lands.</b> Vastatrix takes hold in the hill country within one season.</span></div>
+          <div class="tick"><span class="year">1877</span><span class="desc"><b>The collapse.</b> Output craters; estates replant with tea at scale.</span></div>
+          <div class="tick"><span class="year">1900s</span><span class="desc"><b>The forgetting.</b> Ceylon becomes the world's tea garden. Coffee becomes a memory.</span></div>
+          <div class="tick"><span class="year">Today</span><span class="desc"><b>The revival.</b> A few estates plant coffee again, and we roast it in Colombo.</span></div>
+        </div>
+
+        <p class="pull-line">Tea made the island famous. <em>Coffee made it first.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rim-band" aria-hidden="true"></div>
+
+  <!-- ================= THE BOARD ================= -->
+  <section class="board" id="board" aria-labelledby="board-title">
+    <div class="wrap">
+      <div class="board-head reveal">
+        <div>
+          <p class="section-label on-dark">The Board</p>
+          <h2 class="section-title" id="board-title">Drinks, in the order the kade makes them.</h2>
+          <p class="section-sub">Roasted Tuesday &amp; Saturday on Galle Road. Steamed coconut milk, kitul palm sugar, and no queue.</p>
+        </div>
+        <p class="board-note">Prices in rupees</p>
+      </div>
+
+      <div class="menu-list reveal">
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Kopi <span class="si">කෝපි</span></h3>
+            <p class="menu-desc">House black. Straight, unsweetened, in the small enamel cup. How it has always been taken.</p>
+            <p class="menu-data">KENT · WASHED · CITY+ · 09 MIN</p>
+          </div>
+          <span class="menu-price">Rs 350</span>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Kiri Kopi <span class="si">කිරි කෝපි</span></h3>
+            <p class="menu-desc">Kopi with steamed coconut milk — the local flat white, made from the island's pantry.</p>
+            <p class="menu-data">KENT · CUT WITH POL-KIRI</p>
+          </div>
+          <span class="menu-price">Rs 450</span>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Jaggery Kopi</h3>
+            <p class="menu-desc">Kitul palm sugar stirred through while it's hot. Sweet, dark, and a little smoky.</p>
+            <p class="menu-data">S795 · NATURAL · JAGGERY SYRUP</p>
+          </div>
+          <span class="menu-price">Rs 420</span>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Espresso</h3>
+            <p class="menu-desc">Single-origin Kent, pulled short over a brass saucer. The tasting notes are in the cup, not on the chalkboard.</p>
+            <p class="menu-data">KENT · WASHED · SO18</p>
+          </div>
+          <span class="menu-price">Rs 400</span>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Ceylon Filter</h3>
+            <p class="menu-desc">Steeped slow in a brass filter, long and sweet, drained into a tumbler with milk on the side.</p>
+            <p class="menu-data">BOURBON · HONEY · 18 HRS</p>
+          </div>
+          <span class="menu-price">Rs 380</span>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <h3 class="menu-name">Beans · 250 g</h3>
+            <p class="menu-desc">Take the roast home. Roasted Tuesday &amp; Saturday; bags leave with a date, not a best-before fairy tale.</p>
+            <p class="menu-data">WHATEVER'S ON THE BAR</p>
+          </div>
+          <span class="menu-price">Rs 2,400</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rim-band" aria-hidden="true"></div>
+
+  <!-- ================= THE ESTATES ================= -->
+  <section class="estates" id="estates" aria-labelledby="estates-title">
+    <div class="wrap">
+      <div class="estates-head reveal">
+        <p class="section-label">The Estates</p>
+        <h2 class="section-title" id="estates-title">Coffee is a recent memory here. We're making it present.</h2>
+        <p class="section-sub">Three lots on the bar this week, grown on the same island that once supplied the world.</p>
+      </div>
+
+      <div class="lot-grid">
+        <article class="lot reveal">
+          <h3 class="lot-name">Kent</h3>
+          <p class="lot-tag">The rust-tolerant classic</p>
+          <p class="lot-meta">
+            <b>Region</b>&nbsp; Kandy · 1,200 m<br />
+            <b>Process</b>&nbsp; Washed<br />
+            <b>Cup</b>&nbsp; Cacao, orange zest
+          </p>
+        </article>
+
+        <article class="lot reveal">
+          <h3 class="lot-name">S795</h3>
+          <p class="lot-tag">Bred to resist the rust</p>
+          <p class="lot-meta">
+            <b>Region</b>&nbsp; Matale · 900 m<br />
+            <b>Process</b>&nbsp; Natural<br />
+            <b>Cup</b>&nbsp; Jaggery, molasses
+          </p>
+        </article>
+
+        <article class="lot reveal">
+          <h3 class="lot-name">Bourbon</h3>
+          <p class="lot-tag">The high-grown sweet one</p>
+          <p class="lot-meta">
+            <b>Region</b>&nbsp; Nuwara Eliya · 1,800 m<br />
+            <b>Process</b>&nbsp; Honey<br />
+            <b>Cup</b>&nbsp; Floral, green apple
+          </p>
+        </article>
+      </div>
+
+      <p class="estates-foot reveal">Three lots · roasted in Colombo · on the bar this week</p>
+    </div>
+  </section>
+
+  <!-- ================= VISIT ================= -->
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="wrap visit-grid">
+      <div class="visit-copy reveal">
+        <p class="section-label">Visit</p>
+        <h2 class="section-title" id="visit-title">Corner of Galle Road, by the old lighthouse.</h2>
+        <p class="section-sub">Enamel cups, a brass filter, and a counter with room to lean on. The steam tells you when it's fresh.</p>
+
+        <div class="visit-meta">
+          <p class="vm"><b>Find us</b>&nbsp;&nbsp; 42 Galle Road, Colombo 03</p>
+          <p class="vm"><b>Call</b>&nbsp;&nbsp; +94 77 123 4567</p>
+        </div>
+
+        <p class="visit-hours">
+          MON–SAT &nbsp; 07:00 – 19:00<br />
+          SUN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 08:00 – 16:00
+        </p>
+
+        <div class="visit-cta">
+          <a class="btn btn-paper" href="#top">Drop by</a>
+        </div>
+      </div>
+
+      <div class="visit-cup reveal">
+        <svg class="cup-svg" viewBox="0 0 300 360" role="img" aria-label="Small blue-rimmed enamel cup">
+          <ellipse cx="150" cy="318" rx="118" ry="14" fill="#0a2a5e" opacity="0.45"/>
+          <ellipse cx="150" cy="308" rx="116" ry="16" fill="#0a2a5e"/>
+          <ellipse cx="150" cy="304" rx="116" ry="16" fill="#faf5ea"/>
+          <path d="M90 112 L210 112 L202 258 Q150 272 98 258 Z" fill="#faf5ea" stroke="#0a2a5e" stroke-width="2"/>
+          <path d="M102 246 L198 246 L200 252 Q150 262 100 252 Z" fill="#2050ae"/>
+          <path d="M90 118 L210 118 L208 140 Q150 149 92 140 Z" fill="#2050ae"/>
+          <ellipse cx="150" cy="113" rx="54" ry="9" fill="#201812"/>
+          <ellipse cx="150" cy="111" rx="50" ry="7" fill="#3a2e24"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">Kopi Kade <span class="si" lang="si">කෝපි කඩේ</span></p>
+    <p class="footer-tag">Coffee, before tea.</p>
+    <p class="footer-note">© 2026 · Roasted &amp; poured in Colombo · <a href="#top">Back to top</a></p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  // Nav toggle (mobile)
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.textContent = open ? '×' : '+';
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '+';
+    })
+  );
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

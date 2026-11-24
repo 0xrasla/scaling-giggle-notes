@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Arena · Final Countdown</title>
+<style>
+  :root {
+    --arena: #0a0c11;
+    --panel: #12151c;
+    --panel-inner: #171b23;
+    --frame: #262c38;
+    --frame-bright: #38404f;
+    --led: #ffb62e;
+    --led-dim: rgba(255, 182, 46, 0.09);
+    --red: #ff4b33;
+    --muted: #8b95a5;
+    --faint: #4a5261;
+    --live: #4ade80;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #151a24 0%, var(--arena) 55%),
+      var(--arena);
+    color: #e6ebf2;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: clamp(12px, 3vw, 40px);
+  }
+
+  .board {
+    width: min(100%, 920px);
+    background: var(--panel);
+    border: 1px solid var(--frame-bright);
+    border-radius: 14px;
+    padding: clamp(12px, 2.5vw, 26px);
+    box-shadow:
+      0 30px 80px -20px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 4px 12px;
+    border-bottom: 1px solid var(--frame);
+    margin-bottom: clamp(14px, 2.5vw, 22px);
+    font-size: clamp(10px, 1.4vw, 13px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .eyebrow .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--live);
+  }
+
+  .eyebrow .live::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  .eyebrow .tag { color: var(--faint); }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 2.4fr 1fr;
+    align-items: stretch;
+    gap: clamp(10px, 2vw, 22px);
+  }
+
+  .plaque {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: clamp(10px, 2vw, 18px);
+    background: var(--panel-inner);
+    border: 1px solid var(--frame);
+    border-radius: 8px;
+    min-width: 0;
+  }
+
+  .plaque .side {
+    font-size: clamp(9px, 1.2vw, 11px);
+    letter-spacing: 0.28em;
+    color: var(--faint);
+  }
+
+  .plaque .name {
+    font-size: clamp(16px, 2.6vw, 26px);
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .plaque .name.clock {
+    color: var(--led);
+    text-shadow: 0 0 14px rgba(255,182,46,0.35);
+  }
+
+  .clock {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    gap: clamp(8px, 1.5vw, 14px);
+    min-width: 0;
+  }
+
+  .display {
+    width: 100%;
+    background: #0d1016;
+    border: 1px solid var(--frame);
+    border-radius: 8px;
+    padding: clamp(8px, 1.6vw, 14px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .display::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0 1px,
+      transparent 1px 3px
+    );
+    pointer-events: none;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ends {
+    font-size: clamp(10px, 1.4vw, 12px);
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .ends b { color: var(--led); font-weight: 700; }
+
+  .progress-wrap { margin-top: clamp(14px, 2.5vw, 24px); }
+
+  .progress-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(9px, 1.2vw, 11px);
+    letter-spacing: 0.24em;
+    color: var(--faint);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+
+  .progress-head .pct { color: var(--muted); }
+
+  .track {
+    height: 8px;
+    background: #0d1016;
+    border: 1px solid var(--frame);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8a6a1a, var(--led));
+    box-shadow: 0 0 10px rgba(255,182,46,0.5);
+    transition: width 0.5s linear;
+  }
+
+  .board.is-final .fill { background: linear-gradient(90deg, #7a1e12, var(--red)); box-shadow: 0 0 10px rgba(255,75,51,0.5); }
+
+  .board.is-final .plaque .name.clock,
+  .board.is-final .ends b { color: var(--red); text-shadow: 0 0 14px rgba(255,75,51,0.45); }
+
+  .banner {
+    margin-top: clamp(14px, 2.5vw, 24px);
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    background: rgba(255,75,51,0.08);
+    color: var(--red);
+    font-size: clamp(14px, 2.4vw, 22px);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: clamp(10px, 1.8vw, 16px);
+    display: none;
+  }
+
+  .board.is-final .banner { display: block; animation: flash 1s steps(2, jump-none) infinite; }
+
+  .footer {
+    margin-top: clamp(14px, 2.5vw, 22px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0 4px;
+    font-size: clamp(9px, 1.2vw, 11px);
+    letter-spacing: 0.18em;
+    color: var(--faint);
+    text-transform: uppercase;
+  }
+
+  .sound-btn {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--frame);
+    border-radius: 5px;
+    padding: 6px 12px;
+    font: inherit;
+    font-size: clamp(9px, 1.2vw, 11px);
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .sound-btn:hover { border-color: var(--frame-bright); color: #e6ebf2; }
+  .sound-btn.on { color: var(--led); border-color: var(--led); }
+  .sound-btn:focus-visible { outline: 2px solid var(--led); outline-offset: 2px; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  @media (max-width: 640px) {
+    .main { grid-template-columns: 1fr; }
+    .plaque { flex-direction: row; align-items: baseline; gap: 12px; }
+    .footer { flex-direction: column; gap: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eyebrow .live::before, .banner { animation: none; }
+    .fill { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="board" id="board" aria-live="off">
+    <header class="eyebrow">
+      <span class="live">Workshop Arena · Live</span>
+      <span class="tag">Final Countdown</span>
+    </header>
+
+    <section class="main">
+      <div class="plaque">
+        <span class="side">Home</span>
+        <span class="name">Workshop</span>
+      </div>
+
+      <div class="clock">
+        <div class="display">
+          <canvas id="clock" aria-label="Time remaining"></canvas>
+        </div>
+        <div class="ends" id="ends">Ends at <b id="endTime">--:--</b></div>
+      </div>
+
+      <div class="plaque">
+        <span class="side">Guest</span>
+        <span class="name clock" id="guestName">The Clock</span>
+      </div>
+    </section>
+
+    <section class="progress-wrap">
+      <div class="progress-head">
+        <span>Period</span>
+        <span class="pct" id="pct">0%</span>
+      </div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </section>
+
+    <div class="banner" id="banner">Final &middot; End of Workshop</div>
+
+    <footer class="footer">
+      <span>Time keeps score &middot; authority is the presenter</span>
+      <button class="sound-btn" id="soundBtn" type="button">Sound Off</button>
+    </footer>
+  </main>
+
+<script>
+(() => {
+  "use strict";
+
+  const DURATION = 3 * 60 * 60 * 1000;
+  const KEY = "workshop-countdown-end";
+
+  const FONT = {
+    "0": ["01110","10001","10011","10101","11001","10001","01110"],
+    "1": ["00100","01100","00100","00100","00100","00100","01110"],
+    "2": ["01110","10001","00001","00010","00100","01000","11111"],
+    "3": ["11111","00010","00100","00010","00001","10001","01110"],
+    "4": ["00010","00110","01010","10010","11111","00010","00010"],
+    "5": ["11111","10000","11110","00001","00001","10001","01110"],
+    "6": ["00110","01000","10000","11110","10001","10001","01110"],
+    "7": ["11111","00001","00010","00100","01000","01000","01000"],
+    "8": ["01110","10001","10001","01110","10001","10001","01110"],
+    "9": ["01110","10001","10001","01111","00001","00010","01100"]
+  };
+
+  const canvas = document.getElementById("clock");
+  const ctx = canvas.getContext("2d");
+  const board = document.getElementById("board");
+  const endTimeEl = document.getElementById("endTime");
+  const pctEl = document.getElementById("pct");
+  const fillEl = document.getElementById("fill");
+  const guestEl = document.getElementById("guestName");
+  const soundBtn = document.getElementById("soundBtn");
+
+  let end = Number(localStorage.getItem(KEY));
+  if (!end || end <= Date.now()) {
+    end = Date.now() + DURATION;
+    localStorage.setItem(KEY, end);
+  }
+  const start = end - DURATION;
+
+  let soundArmed = false;
+  let audioCtx = null;
+  let finalSounded = false;
+
+  endTimeEl.textContent = new Date(end).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+
+  soundBtn.addEventListener("click", () => {
+    soundArmed = !soundArmed;
+    soundBtn.classList.toggle("on", soundArmed);
+    soundBtn.textContent = soundArmed ? "Sound On" : "Sound Off";
+    if (soundArmed && !audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (_) {}
+    }
+  });
+
+  function buzzer() {
+    if (!soundArmed || !audioCtx) return;
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const t0 = audioCtx.currentTime + 0.03;
+    [[0, 0.42], [0.55, 0.42]].forEach(([off, dur]) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = "square";
+      osc.frequency.value = 418;
+      gain.gain.setValueAtTime(0.0001, t0 + off);
+      gain.gain.exponentialRampToValueAtTime(0.22, t0 + off + 0.02);
+      gain.gain.setValueAtTime(0.22, t0 + off + dur - 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + off + dur);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0 + off);
+      osc.stop(t0 + off + dur + 0.05);
+    });
+  }
+
+  const COLS = 42; // 6 digits × 6 + 2 colons × 3
+  const PAD = 12;
+
+  let unit = 10;
+  let cssW = 1;
+  let cssH = 1;
+
+  function layout() {
+    const dpr = window.devicePixelRatio || 1;
+    cssW = canvas.clientWidth;
+    unit = (cssW - PAD * 2) / COLS;
+    cssH = unit * 7 + PAD * 2;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + "px";
+  }
+
+  function digitX(idx) {
+    const row = Math.floor(idx / 2);
+    const col = idx % 2;
+    return PAD + col * 21 * unit + (row > 0 ? 24 * unit : 0);
+  }
+
+  function colonX(which) {
+    return PAD + (which === 0 ? 12 : 30) * unit;
+  }
+
+  function draw(timeStr, colonOn) {
+    const dpr = window.devicePixelRatio || 1;
+    const isFinal = timeStr === "00:00:00";
+    const color = isFinal ? "#ff4b33" : "#ffb62e";
+    const dimColor = isFinal ? "rgba(255,75,51,0.07)" : "rgba(255,182,46,0.07)";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    // Unlit full matrix (faint), so the whole board reads as a scoreboard
+    ctx.fillStyle = dimColor;
+    ctx.shadowBlur = 0;
+    for (let d = 0; d < 6; d++) {
+      drawMatrix(digitX(d), PAD, unit, () => true);
+    }
+    drawColonMatrix(colonX(0), PAD, unit);
+    drawColonMatrix(colonX(1), PAD, unit);
+
+    // Lit digits
+    ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 5;
+    for (let d = 0; d < 6; d++) {
+      const rows = FONT[timeStr[d]] || "0000000";
+      drawMatrix(digitX(d), PAD, unit, (r, c) => rows[r] && rows[r][c] === "1");
+    }
+    if (colonOn) {
+      drawColonMatrix(colonX(0), PAD, unit);
+      drawColonMatrix(colonX(1), PAD, unit);
+    }
+    ctx.shadowBlur = 0;
+  }
+
+  function drawMatrix(x0, y0, u, shouldLight) {
+    const r = u * 0.34;
+    for (let rw = 0; rw < 7; rw++) {
+      for (let c = 0; c < 5; c++) {
+        if (shouldLight(rw, c)) {
+          dot(x0 + (c + 0.5) * u, y0 + (rw + 0.5) * u, r);
+        }
+      }
+    }
+  }
+
+  function drawColonMatrix(x0, y0, u) {
+    const r = u * 0.34;
+    dot(x0 + u * 0.5, y0 + u * 2.0, r);
+    dot(x0 + u * 0.5, y0 + u * 4.6, r);
+  }
+
+  function dot(x, y, r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function pad2(n) { return String(n).padStart(2, "0"); }
+
+  function tick() {
+    const now = Date.now();
+    let remaining = end - now;
+
+    if (remaining <= 0) {
+      remaining = 0;
+      if (!board.classList.contains("is-final")) {
+        board.classList.add("is-final");
+        guestEl.textContent = "Final";
+        if (!finalSounded) { buzzer(); finalSounded = true; }
+      }
+    } else {
+      if (board.classList.contains("is-final")) {
+        board.classList.remove("is-final");
+        guestEl.textContent = "The Clock";
+        finalSounded = false;
+      }
+    }
+
+    const total = end - start;
+    const elapsedPct = Math.min(100, Math.max(0, (now - start) / total * 100));
+    fillEl.style.width = elapsedPct + "%";
+    pctEl.textContent = Math.round(elapsedPct) + "%";
+
+    const s = Math.floor(remaining / 1000);
+    const timeStr = pad2(Math.floor(s / 3600)) + ":" + pad2(Math.floor((s % 3600) / 60)) + ":" + pad2(s % 60);
+    const colonOn = reduced ? true : (Math.floor(now / 1000) % 2 === 0);
+
+    canvas.setAttribute("aria-label", "Time remaining: " + timeStr);
+    draw(timeStr, colonOn);
+  }
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let raf = null;
+  function loop() {
+    tick();
+    raf = requestAnimationFrame(loop);
+  }
+
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { layout(); }, 120);
+  });
+
+  layout();
+  loop();
+})();
+</script>
+</body>
+</html>
